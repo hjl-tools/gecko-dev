@@ -4,6 +4,9 @@
 
 #if defined(__linux__) && defined(__ELF__)
 .section .note.GNU-stack,"",%progbits
+# ifdef __CET__
+#  include <cet.h>
+# endif
 #endif
 .global ICU_DATA_SYMBOL
 .data
