@@ -4,6 +4,9 @@
 
 #if defined(__linux__) && defined(__ELF__)
 .section .note.GNU-stack,"",%progbits
+# ifdef __CET__
+#  include <cet.h>
+# endif
 #endif
 #ifdef PREFIX
 #  define DATA_SYMBOL _##ICU_DATA_SYMBOL
