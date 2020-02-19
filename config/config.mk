@@ -193,6 +193,11 @@ INCLUDES = \
 
 include $(MOZILLA_DIR)/config/static-checking-config.mk
 
+COMPUTED_LDFLAGS += -Wl,-z,cet-report=error
+COMPUTED_ASFLAGS += -fcf-protection
+COMPUTED_CFLAGS += -fcf-protection
+COMPUTED_CXXFLAGS += -fcf-protection
+
 LDFLAGS		= $(COMPUTED_LDFLAGS) $(PGO_LDFLAGS) $(MK_LDFLAGS)
 
 COMPILE_CFLAGS	= $(COMPUTED_CFLAGS) $(PGO_CFLAGS) $(_DEPEND_CFLAGS) $(MK_COMPILE_DEFINES)

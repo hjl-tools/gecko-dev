@@ -18,6 +18,8 @@ if CONFIG['OS_ARCH'] == 'WINNT':
 elif CONFIG['OS_ARCH'] == 'Darwin':
     ASFLAGS += ['-DPREFIX']
 
+ASFLAGS += ['-fcf-protection']
+
 ASFLAGS += [
     '-DICU_DATA_FILE="%s"' % CONFIG['ICU_DATA_FILE'],
     '-DICU_DATA_SYMBOL=icudt%s_dat' % CONFIG['MOZ_ICU_VERSION'],
