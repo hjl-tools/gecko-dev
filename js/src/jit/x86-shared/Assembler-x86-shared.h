@@ -931,6 +931,7 @@ class AssemblerX86Shared : public AssemblerShared {
  public:
   void nop() { masm.nop(); }
   void nop(size_t n) { masm.insert_nop(n); }
+  void endbr() { masm.endbr(); }
   void j(Condition cond, Label* label) { jSrc(cond, label); }
   void jmp(Label* label) { jmpSrc(label); }
 
