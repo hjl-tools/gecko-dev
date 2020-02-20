@@ -63,6 +63,21 @@ class BaseAssembler : public GenericAssembler {
     m_formatter.oneByteOp(OP_NOP);
   }
 
+  void endbr() {
+#if defined(JS_CODEGEN_X86)
+    spew("endbr32");
+    m_formatter.int32Constant(0xfb1e0ff3);
+#else
+    spew("endbr64");
+    m_formatter.int32Constant(0xfa1e0ff3);
+#endif
+  }
+
+  void notrack() {
+    spew("notrack");
+    m_formatter.oneByteOp(PRE_NOTRACK);
+  }
+
   void comment(const char* msg) { spew("; %s", msg); }
 
   static void patchFiveByteNopToCall(uint8_t* callsite, uint8_t* target) {
