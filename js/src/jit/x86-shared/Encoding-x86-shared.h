@@ -83,6 +83,7 @@ enum OneByteOpcodeID {
   OP_CMP_EvGv = 0x39,
   OP_CMP_GvEv = 0x3B,
   OP_CMP_EAXIv = 0x3D,
+  PRE_NOTRACK = 0x3E,
 #ifdef JS_CODEGEN_X64
   PRE_REX = 0x40,
 #endif
