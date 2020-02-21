@@ -75,6 +75,10 @@ static const uintptr_t CLEAR_CONSTRUCTOR_CODE_TOKEN = 0x1;
   MacroAssembler masm;
 
   Register propertiesReg, newKindReg;
+#if defined(JS_CODEGEN_X86) || defined(JS_CODEGEN_X64)
+  // Generate ENDBR32/ENDB64 at indirect branch target.
+  masm.endbr();
+#endif
 #ifdef JS_CODEGEN_X86
   propertiesReg = eax;
   newKindReg = ecx;
