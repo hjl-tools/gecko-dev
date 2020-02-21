@@ -2436,11 +2436,13 @@ class BaseAssembler : public GenericAssembler {
   }
 
   void call_r(RegisterID dst) {
+    notrack();
     m_formatter.oneByteOp(OP_GROUP5_Ev, dst, GROUP5_OP_CALLN);
     spew("call       *%s", GPRegName(dst));
   }
 
   void call_m(int32_t offset, RegisterID base) {
+    notrack();
     spew("call       *" MEM_ob, ADDR_ob(offset, base));
     m_formatter.oneByteOp(OP_GROUP5_Ev, offset, base, GROUP5_OP_CALLN);
   }
@@ -2478,16 +2480,19 @@ class BaseAssembler : public GenericAssembler {
   }
 
   void jmp_r(RegisterID dst) {
+    notrack();
     spew("jmp        *%s", GPRegName(dst));
     m_formatter.oneByteOp(OP_GROUP5_Ev, dst, GROUP5_OP_JMPN);
   }
 
   void jmp_m(int32_t offset, RegisterID base) {
+    notrack();
     spew("jmp        *" MEM_ob, ADDR_ob(offset, base));
     m_formatter.oneByteOp(OP_GROUP5_Ev, offset, base, GROUP5_OP_JMPN);
   }
 
   void jmp_m(int32_t offset, RegisterID base, RegisterID index, int scale) {
+    notrack();
     spew("jmp        *" MEM_obs, ADDR_obs(offset, base, index, scale));
     m_formatter.oneByteOp(OP_GROUP5_Ev, offset, base, index, scale,
                           GROUP5_OP_JMPN);
