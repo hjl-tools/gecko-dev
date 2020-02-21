@@ -34,6 +34,9 @@ static const LiveRegisterSet AllRegs =
 void JitRuntime::generateEnterJIT(JSContext* cx, MacroAssembler& masm) {
   enterJITOffset_ = startTrampolineCode(masm);
 
+  // Generate ENDBR64 at indirect branch target.
+  masm.endbr();
+
   masm.assertStackAlignment(ABIStackAlignment,
                             -int32_t(sizeof(uintptr_t)) /* return address */);
 

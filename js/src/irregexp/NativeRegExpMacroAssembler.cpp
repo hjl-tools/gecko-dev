@@ -93,6 +93,11 @@ NativeRegExpMacroAssembler::NativeRegExpMacroAssembler(JSContext* cx, LifoAlloc*
             temp1.name(),
             temp2.name());
 
+#if defined(JS_CODEGEN_X86) || defined(JS_CODEGEN_X64)
+    // Generate ENDBR32/ENDB64 at indirect branch target.
+    masm.endbr();
+#endif
+
     savedNonVolatileRegisters = SavedNonVolatileRegisters(regs);
 
     masm.jump(&entry_label_);

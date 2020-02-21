@@ -314,6 +314,9 @@ void MacroAssembler::callWithABIPre(uint32_t* stackAdjust, bool callFromWasm) {
   MOZ_ASSERT(inCall_);
   uint32_t stackForCall = abiArgs_.stackBytesConsumedSoFar();
 
+  // Generate ENDBR64 at indirect branch target.
+  endbr();
+
   if (dynamicAlignment_) {
     // sizeof(intptr_t) accounts for the saved stack pointer pushed by
     // setupUnalignedABICall.
