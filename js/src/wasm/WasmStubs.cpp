@@ -441,6 +441,10 @@ static bool GenerateInterpEntry(MacroAssembler& masm, const FuncExport& fe,
   MOZ_CRASH("Implement this");
 #  endif
 #endif
+#if defined(JS_CODEGEN_X86) || defined(JS_CODEGEN_X64)
+  // Generate ENDBR32/ENDB64 at indirect branch target.
+  masm.endbr();
+#endif
 
   // Save all caller non-volatile registers before we clobber them here and in
   // the wasm callee (which does not preserve non-volatile registers).
