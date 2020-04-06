@@ -245,6 +245,10 @@ static uint32_t GenPrologue(MacroAssembler& masm, ArgIterator* iter) {
   masm.haltingAlign(CodeAlignment);
   masm.setFramePushed(0);
   uint32_t start = masm.currentOffset();
+#if defined(JS_CODEGEN_X86) || defined(JS_CODEGEN_X64)
+  // Generate ENDBR32/ENDB64 at indirect branch target.
+  masm.endbr();
+#endif
   masm.PushRegsInMask(AtomicNonVolatileRegs);
 #if defined(JS_CODEGEN_ARM) || defined(JS_CODEGEN_ARM64)
   // The return address is among the nonvolatile registers, if pushed at all.
